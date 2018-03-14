@@ -35,21 +35,50 @@ public class GameDataEditor : EditorWindow {
 		}
 
 		if(GUILayout.Button("Load Game Data")){
-			LoadGameData ();
+			LoadGameData();
 		}
 	
 	}
 
-	void LoadGameData(){
-		string filePath = Application.dataPath + gameDataFilePath;
+    void GetQuestions(SocketIOEvent e)
+    {
+        string gameDataFilePath = "/StreamingAssets/data.json";
+        Debug.Log("QUESTION RECEIVED");
 
-		if (File.Exists (filePath)) {
-			string gameData = File.ReadAllText (filePath);
-			editorData = JsonUtility.FromJson<GameData> (gameData);
-		} else {
-			editorData = new GameData ();
-		}
-	}
+        Debug.Log(e.data["questionData"]);
+
+        string filePath = Application.dataPath + gameDataFilePath;
+        File.WriteAllText(filePath, e.data["questionData"].ToString());
+
+        Debug.Log("AHHH");
+      
+
+        if (File.Exists(filePath))
+        {
+
+            string dataAsJson = File.ReadAllText(filePath);
+            Debug.Log(dataAsJson);
+            dataAsJson = dataAsJson.Remove(2, 13);
+
+            dataAsJson = dataAsJson.Insert(0, @"{""allRoundData"":");
+            dataAsJson = dataAsJson + "}";
+            editorData = JsonUtility.FromJson<GameData>(dataAsJson);
+        }
+        else
+        {
+            editorData = new GameData();
+        }
+
+
+    }
+
+    void LoadGameData(){
+        server = GameObject.Find("server");
+        socket = server.GetComponent<SocketIOComponent>();
+        socket.On("getQuestions", GetQuestions);
+        socket.Emit("sendData");
+
+    }
 
 	void SaveGameData(){
 		string jsonObj = JsonUtility.ToJson (editorData);
@@ -59,10 +88,13 @@ public class GameDataEditor : EditorWindow {
 	}
 
 	void SendGameData(){
-		string jsonObj = JsonUtility.ToJson (editorData);
-		server = GameObject.Find ("server");
-		socket = server.GetComponent<SocketIOComponent> ();
-		socket.Emit ("send data", new JSONObject(jsonObj));
+        server = GameObject.Find("server");
+        socket = server.GetComponent<SocketIOComponent>();
+        JSONObject json = new JSONObject(JsonUtility.ToJson(editorData.allRoundData[0]));
+        Debug.Log(json);
+        socket.Emit("move", json);
+
+        
 
 	}
 }

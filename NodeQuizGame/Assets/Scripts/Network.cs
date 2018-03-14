@@ -14,6 +14,7 @@ public class Network : MonoBehaviour {
 	void Start () {
         DontDestroyOnLoad(gameObject);
         socket = GetComponent<SocketIOComponent> ();
+        //allData.LoadGameData();
 
         socket.On("OnConnected", OnConnected);
 
@@ -27,32 +28,26 @@ public class Network : MonoBehaviour {
 
     void OnConnected(SocketIOEvent e)
     {
-        allData.LoadGameData();
-        JSONObject json = new JSONObject(JsonUtility.ToJson(allData.allRoundData[0]));
         
-        Debug.Log(json);
-        socket.Emit("move", json);
+        
+        //socket.Emit("move", json);
     }
 
 
     void GetQuestions (SocketIOEvent e)
     {
         string gameDataFilePath = "/StreamingAssets/data.json";
-        Debug.Log("QUESTION RECIEVED");
+        Debug.Log("QUESTION RECEIVED");
         
-
         Debug.Log(e.data["questionData"]);
         
-
         string filePath = Application.dataPath + gameDataFilePath;
         File.WriteAllText(filePath, e.data["questionData"].ToString());
 
-        allData.LoadGameData();
+        allData.LoadGameData(false);
 
         //string gameData = File.ReadAllText(filePath);
         //allData = JsonUtility.FromJson<DataController>(gameData);
-
-        
 
 
         //Debug.Log(e.data["favorites"]);

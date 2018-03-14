@@ -313,19 +313,10 @@ io.on('connection', function(socket){
 		
 		socket.emit('OnConnected', {id:thisPlayerId});
 		
-		dbObj.collection("questionData").find().toArray(function(err,results){
-			console.log("Site Served");
-			
-			socket.emit('getQuestions', {questionData:results});
-			/*socket.emit('getAnswer1', {favorites:answer1});
-			socket.emit('getAnswer2', {favorites:answer2});
-			socket.emit('getAnswer3', {favorites:answer3});
-			socket.emit('getAnswer4', {favorites:answer4});
-			response.render("index",{favorites:results});*/
-		});
+		
 		
 		players.forEach(function(playerId){
-			if(playerId == thisPlayerId)return;
+			if(playerId == thisPlayerId) return;
 			
 			socket.emit('spawn player', {id:playerId});
 			console.log("Adding a new player", playerId);
@@ -351,14 +342,19 @@ io.on('connection', function(socket){
 		
 		
 		
-		socket.on('send data', function(data){
-			console.log(JSON.stringify(data));
+		socket.on('sendData', function(){
 			
-			dbObj.collection("playerData").update(data, function(err, res){
-
-				if(err)throw err;
-				console.log("data saved to MongoDB");
-			});
+			
+			dbObj.collection("questionData").find().toArray(function(err,results){
+			console.log("sendData");
+			
+			socket.emit('getQuestions', {questionData:results});
+			/*socket.emit('getAnswer1', {favorites:answer1});
+			socket.emit('getAnswer2', {favorites:answer2});
+			socket.emit('getAnswer3', {favorites:answer3});
+			socket.emit('getAnswer4', {favorites:answer4});
+			response.render("index",{favorites:results});*/
+		});
 		});
 	});
 });

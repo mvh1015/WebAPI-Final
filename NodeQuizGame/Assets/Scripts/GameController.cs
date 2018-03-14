@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 
 public class GameController : MonoBehaviour {
+
+
     public Text questionText;
     public Text scoreText;
     public Text timeText;
@@ -13,6 +15,8 @@ public class GameController : MonoBehaviour {
     public int playerScore;
     public GameObject questionDisplay;
     public GameObject endGameDisplay;
+    public Text highScoreDisplay;
+
 
     public BasicObjectPool answerButtonPool;
 
@@ -88,6 +92,10 @@ public class GameController : MonoBehaviour {
     public void EndRound()
     {
         isRoundActive = false;
+
+        dataController.SubmitNewPlayerScore(playerScore);
+        highScoreDisplay.text = dataController.GetHighestPlayerScore().ToString();
+
         questionDisplay.SetActive(false);
         endGameDisplay.SetActive(true);
     }
@@ -110,6 +118,11 @@ public class GameController : MonoBehaviour {
             }
         }
         
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("MenuScreen");
     }
 
     private void UpdateTime()

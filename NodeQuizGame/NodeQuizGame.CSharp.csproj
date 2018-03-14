@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\PlayerProgress.cs" />
     <Compile Include="Assets\Scripts\AnswerButton.cs" />
     <Compile Include="Assets\Scripts\AnswerData.cs" />
     <Compile Include="Assets\Scripts\BasicObjectPool.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\GameDataEditor.cs" />
+    <Compile Include="Assets\Scripts\HighScoreData.cs" />
+    <Compile Include="Assets\Scripts\HighScorePlayerData.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\Network.cs" />
     <Compile Include="Assets\Scripts\NetworkMovement.cs" />
