@@ -1,0 +1,45 @@
+<% include header %>
+	
+<h2>Add new question and answers.</h2>
+
+<form method="post" role="form">
+	<div class= "form-group">
+		<label for="tite">Type a Question</label>
+		
+		<input type="text" class="form-control" id="title" name = "title" placeholder = "Enter name of favorite thing here" required>
+
+		
+	</div>
+	<div class = "form-group form-inline"">
+		<label for="content">Answer 1</label>
+		&emsp; 
+		<textarea class = "form-control" id="body" name="answer1" placeholder="Add Answer" rows="1" required></textarea>
+		&emsp; <input name = "isCorrect" type="checkbox" value="ans1"> Correct Answer? 
+		
+	</div>
+	<div class = "form-group form-inline">
+
+		<label for="content">Answer 2</label>
+		&emsp; 
+		<textarea class = "form-control" id="body" name="answer2" placeholder="Add Answer" rows="1" required></textarea>
+		&emsp; <input name = "isCorrect" type="checkbox" value="ans2"> Correct Answer? 
+	</div>
+	<div class = "form-group form-inline">
+		<label for="content">Answer 3</label>
+		&emsp; 
+		<textarea class = "form-control" id="body" name="answer3" placeholder="Add Answer" rows=1" required></textarea>
+		&emsp; <input name = "isCorrect" type="checkbox" value="ans3"> Correct Answer? 
+	</div>
+	<div class = "form-group form-inline">
+		<label for="content">Answer 4</label>
+		&emsp; 
+		<textarea class = "form-control" id="body" name="answer4" placeholder="Add Answer" rows=1" required></textarea>
+		&emsp; <input name = "isCorrect" type="checkbox" value="ans4"> Correct Answer? 
+	</div>
+	<div class = "form-group">
+		<input type = "submit" value = "Post Question & Answer" class="btn btn-primary">
+	</div>
+
+</form>	
+
+<% include footer %>

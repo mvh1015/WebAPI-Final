@@ -1,0 +1,32 @@
+<% include header %>
+	
+	<% if(favorites.length){ %>
+		<%favorites[0].questions.forEach(function(questions) {%>
+		<div class = "panel panel-default">
+			<form name = "delete" action="delete" method="post" class="form-group"> 
+				<div class = "panel-heading">
+					<div class = "text-muted pull-right">
+						<input type="hidden" name ="title" value = "<%=questions.questionText%>">
+						<input type="submit" id="Delete" value = "Delete" class="btn btn-primary">  </input>
+					</div>
+					<%=questions.questionText%> 
+				</div> 
+			
+			<div class = "panel-body">
+				<%questions.answers.forEach(function(answers) {%>
+				<br>
+				<input type="checkbox" <% if (answers.isCorrect){ %> 
+					checked
+					<% } %>
+					disabled>
+					<%= "Answer: " + answers.answerText %>
+				<% }) %>
+			</div>
+			</form>
+		</div>
+		<% }) %>
+	<% } else { %>
+		No entries! <a href="/new-entry"> Add a question?</a>
+	<% } %>
+
+<% include footer %>
