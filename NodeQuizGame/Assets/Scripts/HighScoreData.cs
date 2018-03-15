@@ -6,6 +6,6 @@ using UnityEngine;
 public class HighScoreData
 {
 
-    public HighScorePlayerData highScore;
+    public HighScorePlayerData[] highScore;
 
 }
