@@ -98,6 +98,8 @@ public class GameController : MonoBehaviour {
 
         questionDisplay.SetActive(false);
         endGameDisplay.SetActive(true);
+
+
     }
 
     public void StartOver()

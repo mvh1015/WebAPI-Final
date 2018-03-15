@@ -94,7 +94,5 @@ public class GameDataEditor : EditorWindow {
         Debug.Log(json);
         socket.Emit("move", json);
 
-        
-
 	}
 }

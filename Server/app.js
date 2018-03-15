@@ -312,6 +312,7 @@ io.on('connection', function(socket){
 		
 		
 		socket.emit('OnConnected', {id:thisPlayerId});
+
 		
 		
 		
@@ -325,10 +326,20 @@ io.on('connection', function(socket){
 		socket.on('move', function(data){
 			
 			data._id = 500000;
-			console.log("Player position is: ", JSON.stringify(data));
+			console.log("data is: ", JSON.stringify(data));
 			dbObj.collection("questionData").save(data, function(err, res){
 			if(err)throw err;
 			console.log("data saved to MongoDB");
+		});
+
+		socket.on('highscoremove', function(data){
+			
+			dbObj.collection("highScoreData").find().toArray(function(err,results){
+				console.log("sendData");
+				
+				socket.emit('GetHighScore', {highScoreData:results});
+
+			});
 		});
 			
 			
@@ -339,9 +350,7 @@ io.on('connection', function(socket){
 			players.splice(players.indexOf(thisPlayerId),1);
 			socket.broadcast.emit('disconnected', {id:thisPlayerId});
 		});
-		
-		
-		
+
 		socket.on('sendData', function(){
 			
 			
@@ -349,11 +358,22 @@ io.on('connection', function(socket){
 			console.log("sendData");
 			
 			socket.emit('getQuestions', {questionData:results});
+
+
 			/*socket.emit('getAnswer1', {favorites:answer1});
 			socket.emit('getAnswer2', {favorites:answer2});
 			socket.emit('getAnswer3', {favorites:answer3});
 			socket.emit('getAnswer4', {favorites:answer4});
 			response.render("index",{favorites:results});*/
+		});
+
+		socket.on('sendHighScoreData', function(){
+			
+			console.log("highScoredata is: ", JSON.stringify(data));
+			dbObj.collection("highScoreData").insertOne(data, function(err, res){
+			if(err)throw err;
+			console.log("data saved to MongoDB");
+
 		});
 		});
 	});

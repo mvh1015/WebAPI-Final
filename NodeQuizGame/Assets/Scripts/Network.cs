@@ -5,42 +5,43 @@ using SocketIO;
 using System.IO;
 
 public class Network : MonoBehaviour {
- 	static SocketIOComponent socket;
+    static SocketIOComponent socket;
     public DataController allData;
-    
-	
 
-	// Use this for initialization
-	void Start () {
+
+
+    // Use this for initialization
+    void Start() {
         DontDestroyOnLoad(gameObject);
-        socket = GetComponent<SocketIOComponent> ();
+        socket = GetComponent<SocketIOComponent>();
         //allData.LoadGameData();
 
         socket.On("OnConnected", OnConnected);
 
-        
-        socket.On ("getQuestions", GetQuestions);
-		/*socket.On ("spawn player", OnSpawned);
+        socket.On("getHighScore", GetHighScore);
+        socket.On("getQuestions", GetQuestions);
+
+        HighScoreMove();   //ask node to send highscore here
+
+        /*socket.On ("spawn player", OnSpawned);
 		socket.On ("disconnected", OnDisconnected);
 		socket.On ("move", OnMove);
 		players = new Dictionary<string, GameObject> ();*/
-	}
+    }
 
     void OnConnected(SocketIOEvent e)
     {
-        
-        
         //socket.Emit("move", json);
     }
 
 
-    void GetQuestions (SocketIOEvent e)
+    void GetQuestions(SocketIOEvent e)
     {
         string gameDataFilePath = "/StreamingAssets/data.json";
         Debug.Log("QUESTION RECEIVED");
-        
+
         Debug.Log(e.data["questionData"]);
-        
+
         string filePath = Application.dataPath + gameDataFilePath;
         File.WriteAllText(filePath, e.data["questionData"].ToString());
 
@@ -49,10 +50,31 @@ public class Network : MonoBehaviour {
         //string gameData = File.ReadAllText(filePath);
         //allData = JsonUtility.FromJson<DataController>(gameData);
 
-
         //Debug.Log(e.data["favorites"]);
 
     }
+
+    void GetHighScore(SocketIOEvent e)  //recieve highscores from mongo
+    {
+       
+        string highScoreDataFilePath = "/StreamingAssets/highScore.json";
+        Debug.Log("highscore recieved");
+        
+        string filePath = Application.dataPath + highScoreDataFilePath;
+        File.WriteAllText(filePath, e.data["highScoreData"].ToString());            //throw it in highscore json
+
+        string dataAsJson = File.ReadAllText(filePath);
+
+        allData.allHighScoreData.highScore = JsonUtility.FromJson<HighScorePlayerData>(dataAsJson);
+
+    }
+
+    void HighScoreMove()
+    {
+        
+        socket.Emit("highscoremove");
+    }
+
     /*
 	// Tells us we are connected
 	void OnConnected (SocketIOEvent e) {
@@ -76,7 +98,7 @@ public class Network : MonoBehaviour {
 		Destroy (player);
 		//players.Remove (id);
 	}
-	void OnMove(SocketIOEvent e){
+	void OnHighScoreMove(SocketIOEvent e){
 		Debug.Log ("Networked player is moving " + e.data);
 
 		var id = e.data["id"].ToString();
@@ -91,7 +113,7 @@ public class Network : MonoBehaviour {
 		netMove.NetworkMovement (pos, h, v);
 	}
     */
-	string GetStringFromJson(JSONObject data, string key){
+    string GetStringFromJson(JSONObject data, string key){
 		return data [key].ToString().Replace("\"", "");
 	}
 
