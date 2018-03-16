@@ -11,7 +11,7 @@ public class DataController : MonoBehaviour {
 
     public List<HighScorePlayerData> allPlayerData;
     private string gameDataFileName = "data.json";
-    public List<HighScoreData> allHighScoreData;
+    public HighScoreData allHighScoreData;
     private PlayerProgress playerProgress;
     
 
@@ -34,7 +34,7 @@ public class DataController : MonoBehaviour {
         newData.score = newScore.ToString();
         allPlayerData.Add(newData);
 
-        GameObject.Find("server").GetComponent<SocketIOComponent>().Emit(JsonUtility.ToJson(newData));
+        GameObject.Find("server").GetComponent<SocketIOComponent>().Emit("sendHighScoreData", new JSONObject(JsonUtility.ToJson(newData)));
 
         // If newScore is greater than playerProgress.highestScore, update playerProgress with the new value and call SavePlayerProgress()
         if (newScore > playerProgress.highestScore)

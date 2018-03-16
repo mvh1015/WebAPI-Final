@@ -328,8 +328,9 @@ io.on('connection', function(socket){
 			data._id = 500000;
 			console.log("data is: ", JSON.stringify(data));
 			dbObj.collection("questionData").save(data, function(err, res){
-			if(err)throw err;
-			console.log("data saved to MongoDB");
+				if(err)throw err;
+				console.log("data saved to MongoDB");
+			});
 		});
 
 		socket.on('highscoremove', function(data){
@@ -343,7 +344,7 @@ io.on('connection', function(socket){
 		});
 			
 			
-		});
+		
 		
 		socket.on('disconnect', function(){
 			console.log("Player Disconnected");
@@ -355,9 +356,11 @@ io.on('connection', function(socket){
 			
 			
 			dbObj.collection("questionData").find().toArray(function(err,results){
-			console.log("sendData");
+				console.log("sendData");
 			
-			socket.emit('getQuestions', {questionData:results});
+				socket.emit('getQuestions', {questionData:results});
+			
+			});
 
 
 			/*socket.emit('getAnswer1', {favorites:answer1});
@@ -371,16 +374,14 @@ io.on('connection', function(socket){
 			
 			console.log("highScoredata is: ", JSON.stringify(data));
 			dbObj.collection("highScoreData").insertOne(data, function(err, res){
-			if(err)throw err;
-			console.log("data saved to MongoDB");
+				if(err)throw err;
+				console.log("data saved to MongoDB");
+			});
 
 		});
-		});
+		
 	});
 });
-
-
-
 
 
 

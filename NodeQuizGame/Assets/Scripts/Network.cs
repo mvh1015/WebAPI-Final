@@ -65,7 +65,7 @@ public class Network : MonoBehaviour {
 
         string dataAsJson = File.ReadAllText(filePath);
 
-        allData.allHighScoreData.highScore = JsonUtility.FromJson<HighScorePlayerData>(dataAsJson);
+        allData.allHighScoreData = JsonUtility.FromJson<HighScoreData>(dataAsJson);
 
     }
 
