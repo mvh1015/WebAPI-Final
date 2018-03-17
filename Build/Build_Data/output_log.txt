@@ -1,0 +1,122 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1080 (ID=0x1b80)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   23.21.13.8813
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\WebAPI-Final\Build\Build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\WebAPI-Final\Build\Build_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.229 seconds
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\WebAPI-Final\Build\Build_Data\Managed\Mono.Security.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.038152 ms
+EMITTING highscoremove
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+3/17/2018 3:52:37 AM|Error|WebSocket.Send|A WebSocket connection isn't established.
+{"allRoundData":[{"name":"Round 0","timeLimitInSeconds":90,"pointsAddedForCorrectAnswers":10,"questions":[{"questionText":"How old is Mike Harrison","answers":[{"answerText":"19","isCorrect":false},{"answerText":"21","isCorrect":false},{"answerText":"23","isCorrect":false},{"answerText":"26","isCorrect":true}]},{"questionText":"Where does Mike Harrison live?","answers":[{"answerText":"Providence","isCorrect":false},{"answerText":"Worcester","isCorrect":false},{"answerText":"Scituate","isCorrect":true},{"answerText":"Cranston","isCorrect":false}]},{"questionText":"What time is Mike Harrison submitting this?","answers":[{"answerText":"7 PM","isCorrect":false},{"answerText":"11 PM","isCorrect":false},{"answerText":"2 AM","isCorrect":true}]},{"questionText":"How much effort in design did Mike Harrison put in this","answers":[{"answerText":"None","isCorrect":true}]},{"questionText":"How many more questions does Mike Harrison have to put in this quiz before he is happy with it?","answers":[{"answerText":"0","isCorrect":false},{"answerText":"3","isCorrect":false},{"answerText":"5","isCorrect":true},{"answerText":"7","isCorrect":false}]},{"questionText":"Is this a trick question?","answers":[{"answerText":"Yes","isCorrect":false},{"answerText":"No","isCorrect":true}]},{"questionText":"How many cups of coffee have I had tonight?","answers":[{"answerText":"0","isCorrect":false},{"answerText":"1","isCorrect":false},{"answerText":"3","isCorrect":true},{"answerText":"5","isCorrect":false}]},{"questionText":"Here comes Peter Cotton Tail...","answers":[{"answerText":"Hopping down the bunny trail..","isCorrect":true},{"answerText":"Drinking tons of ginger ale..","isCorrect":false},{"answerText":"Just got back from bunny jail...","isCorrect":false},{"answerText":"Hopefully Mike doesn't fail..","isCorrect":false}]},{"questionText":"Banging your head against a wall burns ______ calories per hour","answers":[{"answerText":"10","isCorrect":false},{"answerText":"150","isCorrect":true},{"answerText":"300","isCorrect":false},{"answerText":"600","isCorrect":false}]},{"questionText":"Grade on this Final Project","answers":[{"answerText":"An A","isCorrect":true},{"answerText":"100","isCorrect":true},{"answerText":"Perfect","isCorrect":true},{"answerText":"One Hundred","isCorrect":true}]},{"questionText":"Does adding questions from the website work? (This is a test..)","answers":[{"answerText":"Yes","isCorrect":true},{"answerText":"No","isCorrect":false},{"answerText":"No","isCorrect":false},{"answerText":"No","isCorrect":false}]},{"questionText":"Did I seriously sort scores by alphabetical order instead of numerical order and have to fix it?","answers":[{"answerText":"Yes","isCorrect":true},{"answerText":"No","isCorrect":false}]}]}]}
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+  Thread -> id: 3558 -> priority: 1 
+  Thread -> id: 31d4 -> priority: 1 
+UnloadTime: 0.211246 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 361.
+Total: 0.323047 ms (FindLiveObjects: 0.022601 ms CreateObjectMapping: 0.013862 ms MarkObjects: 0.281159 ms  DeleteObjects: 0.004218 ms)
+
+DataController (DataController)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+EMITTING highscoremove
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+highscore recieved
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[{"_id":"5aacc9184007893aecd958b2","playerName":"yes","score":70},{"_id":"5aacc8fa4007893aecd958b0","playerName":"fwefw","score":50},{"_id":"5aacc9094007893aecd958b1","playerName":"y5556","score":50}]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+{ "HighScorePlayerData": [{"_id":"5aacc9184007893aecd958b2","playerName":"yes","score":70},{"_id":"5aacc8fa4007893aecd958b0","playerName":"fwefw","score":50},{"_id":"5aacc9094007893aecd958b1","playerName":"y5556","score":50}]}
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+HighScorePlayerData[]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.393688 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 437.
+Total: 0.379098 ms (FindLiveObjects: 0.032847 ms CreateObjectMapping: 0.013862 ms MarkObjects: 0.327567 ms  DeleteObjects: 0.003917 ms)
+
+3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.868190 ms
+
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 364.
+Total: 0.355292 ms (FindLiveObjects: 0.026820 ms CreateObjectMapping: 0.013862 ms MarkObjects: 0.293515 ms  DeleteObjects: 0.020793 ms)
+
+DataController (DataController)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+

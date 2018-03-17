@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SocketIO;
 using System.IO;
+using System;
 
 
 public class Network : MonoBehaviour {
@@ -68,50 +69,41 @@ public class Network : MonoBehaviour {
 
         string dataAsJson = File.ReadAllText(filePath);
 
-        dataAsJson = dataAsJson.Insert(0, @"{""HighScorePlayerData"": "); 
-        dataAsJson = dataAsJson + "}";
+        //dataAsJson = dataAsJson.Insert(0, @"{""HighScorePlayerData"": "); 
+        //dataAsJson = dataAsJson + "}";
        
         Debug.Log(dataAsJson);
 
-        theData = JsonHelper.FromJson<HighScorePlayerData>(dataAsJson);
+        theData = JsonHelper.getJsonArray<HighScorePlayerData>(dataAsJson);
+
+        Debug.Log(theData);
+
+        allData.allHighScoreData.HighScorePlayerData = theData;
+
+        allData.nonBrokenList.AddRange(theData);
+
+        //Array.Resize(ref allData.allHighScoreData.HighScorePlayerData, 10);
 
         
-        
-        //allData.allHighScoreData.highScore = JsonHelper.FromJson<HighScorePlayerData>(dataAsJson);
-        //Debug.Log(allData.allHighScoreData.highScore.Length);
-        
 
 
-        
+
     }
 
     public static class JsonHelper
     {
-        public static T[] FromJson<T>(string json)
+        public static T[] getJsonArray<T>(string json)
         {
-            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
-            return wrapper.Items;
+            string newJson = "{ \"HighScorePlayerData\": " + json + "}";
+            Debug.Log(newJson);
+            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
+            return wrapper.HighScorePlayerData;
         }
-
-        public static string ToJson<T>(T[] array)
-        {
-            Wrapper<T> wrapper = new Wrapper<T>();
-            wrapper.Items = array;
-            return JsonUtility.ToJson(wrapper);
-        }
-
-        public static string ToJson<T>(T[] array, bool prettyPrint)
-        {
-            Wrapper<T> wrapper = new Wrapper<T>();
-            wrapper.Items = array;
-            return JsonUtility.ToJson(wrapper, prettyPrint);
-        }
-        
 
         [System.Serializable]
         private class Wrapper<T>
         {
-            public T[] Items;
+            public T[] HighScorePlayerData;
         }
     }
 

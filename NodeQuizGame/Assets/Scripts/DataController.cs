@@ -9,9 +9,10 @@ public class DataController : MonoBehaviour {
 
     public RoundData[] allRoundData;
 
-    public List<HighScorePlayerData> allPlayerData;
+    
     private string gameDataFileName = "data.json";
     public HighScoreData allHighScoreData;
+    public List<HighScorePlayerData> nonBrokenList;
     private PlayerProgress playerProgress;
     
 
@@ -31,8 +32,8 @@ public class DataController : MonoBehaviour {
         HighScorePlayerData newData = new HighScorePlayerData();
         
         newData.playerName = playerNameText;
-        newData.score = newScore.ToString();
-        allPlayerData.Add(newData);
+        newData.score = newScore;
+        
 
         GameObject.Find("server").GetComponent<SocketIOComponent>().Emit("sendHighScoreData", new JSONObject(JsonUtility.ToJson(newData)));
 

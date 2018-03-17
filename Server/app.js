@@ -51,7 +51,7 @@ passport.use(new LocalStrategy({
 		MongoClient.connect(url, function(err, db){
 			if(err)throw err;
 			
-			var dbObj = db.db("users");
+			var dbObj = db.db("HarrisonDB");
 			
 			dbObj.collection("users").findOne({username:username}, function(err,results){
 				if(results.password === password) {
@@ -84,7 +84,7 @@ passport.use(new LocalStrategy({
 app.get("/", ensureAuthenticated, function(request,response){
 	MongoClient.connect(url, function(err,db){
 		if(err) throw err;
-		var dbObj = db.db("users");
+		var dbObj = db.db("HarrisonDB");
 		
 		
 		dbObj.collection("questionData").find().toArray(function(err,results){
@@ -106,10 +106,10 @@ app.get("/new-entry", ensureAuthenticated, function(request,response){
 app.get("/highscore", function(request,response){
 	MongoClient.connect(url, function(err,db){
 		if(err) throw err;
-		var dbObj = db.db("users");
+		var dbObj = db.db("HarrisonDB");
 		
 		
-
+		
 		dbObj.collection("highScoreData").find().sort({score:-1}).toArray(function(err,results){
 			console.log("Site Served");
 			console.log({highscore:results});
@@ -136,7 +136,7 @@ app.post("/new-topic", function(request,response){
 	MongoClient.connect(url,function(err, db){
 		if(err)throw err;
 		
-		var dbObj = db.db("users");
+		var dbObj = db.db("HarrisonDB");
 		var topicOfChoice;
 		
 		dbObj.collection("users").findOne({username:username}, function(err, results){
@@ -203,7 +203,7 @@ app.post("/new-entry", function(request,response){
 	MongoClient.connect(url,function(err, db){
 		if(err)throw err;
 		
-		var dbObj = db.db("users");
+		var dbObj = db.db("HarrisonDB");
 
 		dbObj.collection("questionData").update({"_id": 500000},
 			{
@@ -246,7 +246,7 @@ app.post("/delete", function(request,response){
 	MongoClient.connect(url,function(err, db){
 		if(err)throw err;
 		
-		var dbObj = db.db("users");
+		var dbObj = db.db("HarrisonDB");
 
 		
 		
@@ -271,7 +271,7 @@ app.post("/sign-up", function(request,response){
 	console.log(request.body);
 	MongoClient.connect(url,function(err, db){
 		if(err)throw err;
-		var dbObj = db.db("users");
+		var dbObj = db.db("HarrisonDB");
 		
 		
 		
@@ -322,7 +322,7 @@ io.on('connection', function(socket){
 	MongoClient.connect(url, function(err, db){
 		if(err)throw err;
 		
-		var dbObj = db.db("users");
+		var dbObj = db.db("HarrisonDB");
 		
 		var thisPlayerId = shortid.generate();
 		
@@ -356,7 +356,7 @@ io.on('connection', function(socket){
 		socket.on('highscoremove', function(){
 			console.log("trying to sendHighscore Data to Unity");
 			dbObj.collection("highScoreData").find().sort({score:-1}).toArray(function(err,results){
-				console.log("sendHighscore Data to Unity");
+				console.log(results);
 				
 				socket.emit('GetHighScore', {highScoreData:results});
 

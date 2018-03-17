@@ -86,7 +86,6 @@
     <Compile Include="Assets\Scripts\DataController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
-    <Compile Include="Assets\Scripts\GameDataEditor.cs" />
     <Compile Include="Assets\Scripts\HighScoreData.cs" />
     <Compile Include="Assets\Scripts\HighScorePlayerData.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />

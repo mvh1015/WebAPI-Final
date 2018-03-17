@@ -14,10 +14,13 @@ public class MenuController : MonoBehaviour {
         allData = GameObject.Find("DataController").GetComponent<DataController>();
         serverSocket = GameObject.Find("server").GetComponent<SocketIOComponent>();
         Debug.Log(GameObject.Find("DataController").GetComponent<DataController>());
+
+
     }
 
     // Use this for initialization
     public void StartGame () {
+        
         SceneManager.LoadScene("Game");
         
 	}

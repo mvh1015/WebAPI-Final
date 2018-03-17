@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
+using System.Linq;
 
 
 public class GameController : MonoBehaviour {
@@ -22,7 +24,7 @@ public class GameController : MonoBehaviour {
 
     public BasicObjectPool answerButtonPool;
 
-    private DataController dataController;
+    public DataController dataController;
     private RoundData roundData;
     private QuestionData[] questionPool;
     private bool isRoundActive;
@@ -46,6 +48,8 @@ public class GameController : MonoBehaviour {
 
         
 	}
+
+   
 
     private void ShowQuestions()
     {
@@ -93,9 +97,33 @@ public class GameController : MonoBehaviour {
     public void EndRound()
     {
         isRoundActive = false;
+        highScoreDisplay.text = "HighScores\n";
+        int i = 0;
+        int j = 0;
+
+        Debug.Log(dataController.allHighScoreData.HighScorePlayerData.Count());
+        foreach (HighScorePlayerData highScore in dataController.nonBrokenList)
+            {
+                j++;
+                Debug.Log(j);
+            if (highScore != null)
+            {
+                if (highScore.score != 0)
+                {
+
+                    i++;
+                    highScoreDisplay.text += i.ToString() + ". " + highScore.playerName + "   " + highScore.score + "\n";
+                }
+                else
+                {
+                    highScore.score = 0;
+                }
+            }
+            }
+            
 
         
-        highScoreDisplay.text = "HighScore: " + dataController.GetHighestPlayerScore().ToString();
+        
 
         questionDisplay.SetActive(false);
         endGameDisplay.SetActive(true);
@@ -105,8 +133,40 @@ public class GameController : MonoBehaviour {
 
     public void SubmitButton()
     {
-        
+        HighScorePlayerData newScore = new HighScorePlayerData();
+        newScore.playerName = playerNameText.text;
+        newScore.score = playerScore;
+
+        if (dataController.nonBrokenList.Count >= 10 && playerScore > dataController.nonBrokenList[9].score)
+        {
+            dataController.nonBrokenList.RemoveAt(9);
+            dataController.nonBrokenList.Add(newScore);
+
+            dataController.nonBrokenList.Sort((p1, p2) => p2.score.CompareTo(p2.score));
+
+            /*Array.Sort(dataController.allHighScoreData.HighScorePlayerData, delegate (HighScorePlayerData player1, HighScorePlayerData player2)
+            {
+                return (player2.score).CompareTo((player1.score));
+            });*/
+
+        } else if (dataController.nonBrokenList.Count < 10)
+        {
+
+            dataController.nonBrokenList.Add(newScore);
+            
+            /*Array.Sort(dataController.allHighScoreData.HighScorePlayerData, delegate (HighScorePlayerData player1, HighScorePlayerData player2)
+            {
+
+
+                return (player2.score).CompareTo((player1.score));
+            });*/
+
+            dataController.nonBrokenList.Sort((p1, p2) => p2.score.CompareTo(p2.score));
+        }
+        //dataController.allHighScoreData
+
         dataController.SubmitNewPlayerScore(playerNameText.text, playerScore);
+        EndRound();
 
     }
 
@@ -117,6 +177,10 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (dataController == null)
+            dataController = FindObjectOfType<DataController>();
+
         if (isRoundActive)
         {
             timeRemaining -= Time.deltaTime;

@@ -120,6 +120,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\GameDataEditor.cs" />
     <Compile Include="Assets\SocketIO\JSONObject\Editor\JSONChecker.cs" />
   </ItemGroup>
   <ItemGroup>
