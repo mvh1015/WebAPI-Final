@@ -18,6 +18,23 @@ public class GameDataEditor : EditorWindow {
 	}
 
 	void OnGUI(){
+        string filePath = Application.dataPath + gameDataFilePath;
+        if (File.Exists(filePath))
+        {
+
+            string dataAsJson = File.ReadAllText(filePath);
+
+            if (!dataAsJson.EndsWith("}"))
+            {
+                dataAsJson = dataAsJson.Remove(2, 13);
+
+                dataAsJson = dataAsJson.Insert(0, @"{""allRoundData"":");
+                dataAsJson = dataAsJson + "}";
+            }
+            editorData = JsonUtility.FromJson<GameData>(dataAsJson);
+            
+        }
+        
 		if(editorData != null){
 			//display the data from json
 			SerializedObject serializedObject = new SerializedObject(this);

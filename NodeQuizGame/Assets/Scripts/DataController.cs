@@ -26,11 +26,11 @@ public class DataController : MonoBehaviour {
         
     }
 
-    public void SubmitNewPlayerScore(int newScore)
+    public void SubmitNewPlayerScore(string playerNameText, int newScore)
     {
         HighScorePlayerData newData = new HighScorePlayerData();
         
-        newData.playerName = "Mike";
+        newData.playerName = playerNameText;
         newData.score = newScore.ToString();
         allPlayerData.Add(newData);
 

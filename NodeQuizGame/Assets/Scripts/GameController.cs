@@ -17,9 +17,10 @@ public class GameController : MonoBehaviour {
     public GameObject endGameDisplay;
     public Text highScoreDisplay;
 
+    public Text playerNameText;
+
 
     public BasicObjectPool answerButtonPool;
-
 
     private DataController dataController;
     private RoundData roundData;
@@ -93,12 +94,19 @@ public class GameController : MonoBehaviour {
     {
         isRoundActive = false;
 
-        dataController.SubmitNewPlayerScore(playerScore);
-        highScoreDisplay.text = dataController.GetHighestPlayerScore().ToString();
+        
+        highScoreDisplay.text = "HighScore: " + dataController.GetHighestPlayerScore().ToString();
 
         questionDisplay.SetActive(false);
         endGameDisplay.SetActive(true);
 
+
+    }
+
+    public void SubmitButton()
+    {
+        
+        dataController.SubmitNewPlayerScore(playerNameText.text, playerScore);
 
     }
 

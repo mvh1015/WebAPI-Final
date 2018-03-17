@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class HighScoreData
 {
-
-    public HighScorePlayerData[] highScore;
+    public HighScorePlayerData[] HighScorePlayerData;
 
 }

@@ -103,6 +103,26 @@ app.get("/new-entry", ensureAuthenticated, function(request,response){
 	response.render("new-entry");	
 });
 
+app.get("/highscore", function(request,response){
+	MongoClient.connect(url, function(err,db){
+		if(err) throw err;
+		var dbObj = db.db("users");
+		
+		
+
+		dbObj.collection("highScoreData").find().sort({score:-1}).toArray(function(err,results){
+			console.log("Site Served");
+			console.log({highscore:results});
+
+			
+			
+			db.close();
+			response.render("highscore",{highscore:results});
+		});
+	
+	});
+});
+
 app.get("/new-topic", ensureAuthenticated, function(request,response){
 	response.render("new-topic");	
 });
@@ -333,18 +353,16 @@ io.on('connection', function(socket){
 			});
 		});
 
-		socket.on('highscoremove', function(data){
-			
-			dbObj.collection("highScoreData").find().toArray(function(err,results){
-				console.log("sendData");
+		socket.on('highscoremove', function(){
+			console.log("trying to sendHighscore Data to Unity");
+			dbObj.collection("highScoreData").find().sort({score:-1}).toArray(function(err,results){
+				console.log("sendHighscore Data to Unity");
 				
 				socket.emit('GetHighScore', {highScoreData:results});
 
 			});
 		});
 			
-			
-		
 		
 		socket.on('disconnect', function(){
 			console.log("Player Disconnected");
@@ -370,7 +388,7 @@ io.on('connection', function(socket){
 			response.render("index",{favorites:results});*/
 		});
 
-		socket.on('sendHighScoreData', function(){
+		socket.on('sendHighScoreData', function(data){
 			
 			console.log("highScoredata is: ", JSON.stringify(data));
 			dbObj.collection("highScoreData").insertOne(data, function(err, res){

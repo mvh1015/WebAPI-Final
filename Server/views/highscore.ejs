@@ -1,0 +1,17 @@
+<% include header %>
+	<% if(highscore.length){ %>
+		<%highscore.forEach(function(highscore, i) {%>
+        <% if ((i+1) <= 10) { %>
+		<div class = "panel panel-default" class="tabcontent">
+			<div class = "panel-heading">
+                <%= (i + 1) + "." %>&nbsp
+				<%= highscore.playerName + "     " %>&nbsp
+                <%= highscore.score %>
+			</div> 
+
+		</div>
+		<% }}) %>
+	<% } else { %>
+		No entries! <a href="/new-entry"> Add a favorite?</a>
+	<% } %>
+<% include footer %>

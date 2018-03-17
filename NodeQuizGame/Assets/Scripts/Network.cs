@@ -4,9 +4,12 @@ using UnityEngine;
 using SocketIO;
 using System.IO;
 
+
 public class Network : MonoBehaviour {
     static SocketIOComponent socket;
     public DataController allData;
+
+    public HighScorePlayerData[] theData;
 
 
 
@@ -18,7 +21,7 @@ public class Network : MonoBehaviour {
 
         socket.On("OnConnected", OnConnected);
 
-        socket.On("getHighScore", GetHighScore);
+        socket.On("GetHighScore", GetHighScore);
         socket.On("getQuestions", GetQuestions);
 
         HighScoreMove();   //ask node to send highscore here
@@ -31,7 +34,7 @@ public class Network : MonoBehaviour {
 
     void OnConnected(SocketIOEvent e)
     {
-        //socket.Emit("move", json);
+        HighScoreMove();
     }
 
 
@@ -65,13 +68,56 @@ public class Network : MonoBehaviour {
 
         string dataAsJson = File.ReadAllText(filePath);
 
-        allData.allHighScoreData = JsonUtility.FromJson<HighScoreData>(dataAsJson);
+        dataAsJson = dataAsJson.Insert(0, @"{""HighScorePlayerData"": "); 
+        dataAsJson = dataAsJson + "}";
+       
+        Debug.Log(dataAsJson);
 
+        theData = JsonHelper.FromJson<HighScorePlayerData>(dataAsJson);
+
+        
+        
+        //allData.allHighScoreData.highScore = JsonHelper.FromJson<HighScorePlayerData>(dataAsJson);
+        //Debug.Log(allData.allHighScoreData.highScore.Length);
+        
+
+
+        
+    }
+
+    public static class JsonHelper
+    {
+        public static T[] FromJson<T>(string json)
+        {
+            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
+            return wrapper.Items;
+        }
+
+        public static string ToJson<T>(T[] array)
+        {
+            Wrapper<T> wrapper = new Wrapper<T>();
+            wrapper.Items = array;
+            return JsonUtility.ToJson(wrapper);
+        }
+
+        public static string ToJson<T>(T[] array, bool prettyPrint)
+        {
+            Wrapper<T> wrapper = new Wrapper<T>();
+            wrapper.Items = array;
+            return JsonUtility.ToJson(wrapper, prettyPrint);
+        }
+        
+
+        [System.Serializable]
+        private class Wrapper<T>
+        {
+            public T[] Items;
+        }
     }
 
     void HighScoreMove()
     {
-        
+        Debug.Log("EMITTING highscoremove");
         socket.Emit("highscoremove");
     }
 
